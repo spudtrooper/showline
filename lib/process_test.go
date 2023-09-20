@@ -13,16 +13,16 @@ func TestGetDisplaySpecValid(t *testing.T) {
 		{
 			fileSpec: "example.go:42",
 			expected: &displaySpec{
-				file: "example.go",
-				line: 42,
+				File: "example.go",
+				Line: 42,
 			},
 			expectedErr: nil,
 		},
 		{
 			fileSpec: "another_file.txt:10",
 			expected: &displaySpec{
-				file: "another_file.txt",
-				line: 10,
+				File: "another_file.txt",
+				Line: 10,
 			},
 			expectedErr: nil,
 		},
@@ -30,14 +30,15 @@ func TestGetDisplaySpecValid(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.fileSpec, func(t *testing.T) {
-			result, err := getDisplaySpec(test.fileSpec)
+			var result displaySpec
+			err := getDisplaySpec(test.fileSpec, &result)
 
 			if err != test.expectedErr {
 				t.Errorf("Expected error: %v, got: %v", test.expectedErr, err)
 			}
 
 			if err == nil {
-				if result.file != test.expected.file || result.line != test.expected.line {
+				if result.File != test.expected.File || result.Line != test.expected.Line {
 					t.Errorf("Expected: %v, got: %v", test.expected, result)
 				}
 			}
@@ -57,10 +58,11 @@ func TestGetDisplaySpecInvalid(t *testing.T) {
 
 	for _, fileSpec := range invalidFileSpecs {
 		t.Run(fileSpec, func(t *testing.T) {
-			result, err := getDisplaySpec(fileSpec)
+			var result displaySpec
+			err := getDisplaySpec(fileSpec, &result)
 
 			if err == nil {
-				t.Errorf("Expected error, got: %v", result)
+				t.Errorf("Expected error, got: %v for fileSpec: %s", result, fileSpec)
 			}
 		})
 	}

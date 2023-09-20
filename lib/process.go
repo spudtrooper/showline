@@ -5,45 +5,40 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strconv"
 
 	"github.com/pkg/errors"
+	"github.com/spudtrooper/strunpack"
 )
 
 var (
-	fileSpecRegex = regexp.MustCompile(`^([^"]+):(\d+)`)
+	fileSpecRegex  = regexp.MustCompile(`^([^:]+):(\d+)`)
+	fileSpecRegex2 = regexp.MustCompile(`^(?P<File>[^:]+):(?P<Line>\d+)`)
 )
 
 type displaySpec struct {
-	file string
-	line int
+	File string
+	Line int
 }
 
-func getDisplaySpec(spec string) (*displaySpec, error) {
-	m := fileSpecRegex.FindStringSubmatch(spec)
-	if len(m) != 3 {
-		return nil, errors.Errorf("invalid file spec: %s", spec)
+func getDisplaySpec(spec string, res *displaySpec) error {
+	if err := strunpack.Unpack(spec, fileSpecRegex2, res); err != nil {
+		return err
 	}
-	file := m[1]
-	line, err := strconv.Atoi(m[2])
-	if line <= 0 {
-		return nil, errors.Errorf("invalid line number: %s", m[2])
+	if res.Line <= 0 {
+		return errors.Errorf("invalid line number: %d", res.Line)
 	}
-	if err != nil {
-		return nil, errors.Errorf("invalid line number: %s", m[2])
-	}
-	return &displaySpec{file, line}, nil
+	return nil
 }
 
 //go:generate genopts --prefix=ProcessFile linesAbove:int:10 linesBelow:int:10 numberLines fromStart toEnd keepGoing
 func ProcessFile(spec string, optss ...ProcessFileOption) error {
 	opts := MakeProcessFileOptions(optss...)
 
-	ds, err := getDisplaySpec(spec)
-	if err != nil {
+	var ds displaySpec
+	if err := getDisplaySpec(spec, &ds); err != nil {
 		return err
 	}
-	f, displayedLine := ds.file, ds.line
+	f, displayedLine := ds.File, ds.Line
 
 	file, err := os.Open(f)
 	if err != nil {

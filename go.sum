@@ -1,4 +1,10 @@
+github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
+github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/spudtrooper/goutil v0.1.113 h1:fiW3LFdwTYCUjyMfED9C1anX2zG63LZQV6e+lNJliGc=
 github.com/spudtrooper/goutil v0.1.113/go.mod h1:OLTaocAKS8vISI2+59sutHQzz5+Z7OlD2cJeb/SSmh4=
+github.com/spudtrooper/strunpack v0.0.1 h1:MSosnY0tlgPkCMqNMuUFYLGxYHkX3WDfNpNVhfDOxq4=
+github.com/spudtrooper/strunpack v0.0.1/go.mod h1:twzV8GXiA6zvuAEMlzOBVplRZstdOTzUK6xcv88YNrU=
+golang.org/x/text v0.13.0 h1:ablQoSUd0tRdKxZewP80B+BaqeKJuVhuRxj/dkrun3k=
+golang.org/x/text v0.13.0/go.mod h1:TvPlkZtksWOMsz7fbANvkp4WM8x/WCo/om8BMLbz+aE=
