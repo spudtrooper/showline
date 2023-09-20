@@ -30,16 +30,15 @@ func TestGetDisplaySpecValid(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.fileSpec, func(t *testing.T) {
-			var result displaySpec
-			err := getDisplaySpec(test.fileSpec, &result)
+			res, err := getDisplaySpec(test.fileSpec)
 
 			if err != test.expectedErr {
 				t.Errorf("Expected error: %v, got: %v", test.expectedErr, err)
 			}
 
 			if err == nil {
-				if result.File != test.expected.File || result.Line != test.expected.Line {
-					t.Errorf("Expected: %v, got: %v", test.expected, result)
+				if res.File != test.expected.File || res.Line != test.expected.Line {
+					t.Errorf("Expected: %v, got: %v", test.expected, res)
 				}
 			}
 		})
@@ -58,11 +57,8 @@ func TestGetDisplaySpecInvalid(t *testing.T) {
 
 	for _, fileSpec := range invalidFileSpecs {
 		t.Run(fileSpec, func(t *testing.T) {
-			var result displaySpec
-			err := getDisplaySpec(fileSpec, &result)
-
-			if err == nil {
-				t.Errorf("Expected error, got: %v for fileSpec: %s", result, fileSpec)
+			if res, err := getDisplaySpec(fileSpec); err == nil {
+				t.Errorf("Expected error, got: %v for fileSpec: %s", res, fileSpec)
 			}
 		})
 	}
