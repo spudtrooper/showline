@@ -1,0 +1,4 @@
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/spudtrooper/goutil v0.1.113 h1:fiW3LFdwTYCUjyMfED9C1anX2zG63LZQV6e+lNJliGc=
+github.com/spudtrooper/goutil v0.1.113/go.mod h1:OLTaocAKS8vISI2+59sutHQzz5+Z7OlD2cJeb/SSmh4=
