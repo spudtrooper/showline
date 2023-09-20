@@ -19,8 +19,8 @@ var (
 )
 
 func realMain() error {
-	for _, fileSpec := range flag.Args() {
-		if err := lib.ProcessFile(fileSpec,
+	for _, spec := range flag.Args() {
+		if err := lib.ProcessFile(spec,
 			lib.ProcessFileLinesAboveFlag(linesAbove),
 			lib.ProcessFileLinesBelowFlag(linesBelow),
 			lib.ProcessFileNumberLinesFlag(numberLines),
@@ -29,10 +29,10 @@ func realMain() error {
 			lib.ProcessFileKeepGoingFlag(keepGoing),
 		); err != nil {
 			if *keepGoing {
-				fmt.Printf("error processing file: %s: %v\n", fileSpec, err)
+				fmt.Printf("error processing file: %s: %v\n", spec, err)
 				continue
 			}
-			return errors.Errorf("error processing file: %s: %v", fileSpec, err)
+			return errors.Errorf("error processing file: %s: %v", spec, err)
 		}
 	}
 	return nil
