@@ -11,8 +11,7 @@ import (
 )
 
 var (
-	fileSpecRegex  = regexp.MustCompile(`^([^:]+):(\d+)`)
-	fileSpecRegex2 = regexp.MustCompile(`^(?P<File>[^:]+):(?P<Line>\d+)`)
+	fileSpecRegex = regexp.MustCompile(`^(?P<File>[^:]+):(?P<Line>\d+)`)
 )
 
 type displaySpec struct {
@@ -21,7 +20,7 @@ type displaySpec struct {
 }
 
 func getDisplaySpec(spec string, res *displaySpec) error {
-	if err := strunpack.Unpack(spec, fileSpecRegex2, res); err != nil {
+	if err := strunpack.Unpack(spec, fileSpecRegex, res); err != nil {
 		return err
 	}
 	if res.Line <= 0 {
